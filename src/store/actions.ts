@@ -20,7 +20,6 @@ const actions = {
     async crateSeries(content: any) {
         const type = Math.floor(Math.random() * 7);//随机生成系列类型
         const seriesName = content.rootState.series.typeList[type];//系列生成方法名
-        console.log(content.state.containerOptions.column)
         const center = Math.floor(content.state.containerOptions.column / 2);//获取中间坐标
         const series = await content.dispatch(`series/${seriesName}`, center, { root: true });//生成系列
         content.commit("setMobileSeries",{//设置移动系列
