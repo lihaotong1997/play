@@ -1,16 +1,28 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-
-
-const count = ref(0)
-</script>
-
 <template>
-  我是首页
+  <div id="wrap" v-loading="loading">
+    <el-button>开始</el-button>
+    <el-button>暂停</el-button>
+    <div v-for="(item1, index1) in store.getters.container" :key="index1">
+      <box v-for="(item2, index2) in item1" :key="index2" :options="item2"></box>
+    </div>
+  </div>
 </template>
-
-<style scoped>
-.read-the-docs {
-  color: #888;
+<script setup lang="ts">
+  import { ref } from 'vue'
+  import { useStore } from "vuex";
+  import box from "./container/box.vue";
+  const store = useStore();
+  let loading = ref(true);
+  //创建容器
+  await store.dispatch('createContainer');
+  loading.value = false;
+  await store.dispatch('run');//默认开始
+</script>
+<style scoped lang="scss">
+#wrap{
+  width: 1200px;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: auto;
 }
 </style>
