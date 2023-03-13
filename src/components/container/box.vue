@@ -10,11 +10,12 @@ import { useStore } from "vuex";
 const props = defineProps(["options"])
 const store = useStore();
 const style = computed(()=>{
-    return {
+    let obj =  {
         width:`${store.state.containerOptions.boxWidth}px`,
         height:`${store.state.containerOptions.boxHeight}px`,
-        backgroundColor:`${props.options.type === "move" ? 'red':''}`
+        backgroundColor: props.options.color,
     }
+    return obj;
 })
 </script>
 
