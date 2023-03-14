@@ -11,6 +11,11 @@ const routes = [
                 component:()=>import("@/components/games/index.vue"),
                 children: [
                     {
+                        path:"",
+                        name:"defalut",
+                        component:()=>import("@/components/games/default.vue"),
+                    },
+                    {
                         path:"tetris",
                         name:"tetris",
                         component:()=>import("@/components/games/tetris/index.vue"),
