@@ -16,10 +16,10 @@ const mutations = {
         }
         state.container = list;
     },
-    change(state:any){//移动的块转换为固定块
-        for(let i = 0; i < state.mobileSeries.list.length; i++){
-            state.container[state.mobileSeries.list[i][0]][state.mobileSeries.list[i][1]].type = "Non-empty";
-            state.container[state.mobileSeries.list[i][0]][state.mobileSeries.list[i][1]].color = state.containerOptions.nonEmptyColor;
+    change(state:any,list:any){//移动的块转换为固定块
+        for(let i = 0; i < list.length; i++){
+            state.container[list[i][1]][list[i][0]].type = "Non-empty";
+            state.container[list[i][1]][list[i][0]].color = state.containerOptions.nonEmptyColor;
         }
         state.mobileSeries = null;//清空移动系列
     },
