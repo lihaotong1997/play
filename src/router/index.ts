@@ -2,6 +2,7 @@ import * as router from "vue-router";
 const routes = [
     {
         path: '/',
+        redirect:"/games",
         name:"index",
         component:()=>import("@/components/index.vue"),
         children: [
@@ -25,10 +26,11 @@ const routes = [
                                 name:"start",
                                 component:()=>import("@/components/games/tetris/start.vue"),
                             },
-                            // {
-                            //     path:"playing",
-                            //     name:"playing",
-                            // },
+                            {
+                                path:"playing",
+                                name:"playing",
+                                component:()=>import("@/components/games/tetris/play.vue"),
+                            },
                             // {
                             //     path:"end",
                             //     name:"end",
