@@ -3,15 +3,16 @@
       <el-main>
         <container></container>
       </el-main>
-      <el-aside width="400px">Aside</el-aside>
+      <el-aside :width="`${props.rightAside}px`">Aside</el-aside>
     </el-container>
 </template>
 
 <script setup lang="ts">
+import { defineProps } from "vue";
 import { useStore } from "vuex";
 import container from "./container.vue";
 const store = useStore();
-store.dispatch("tetris/create");
+const props = defineProps(["rightAside"])
 </script>
 
 <style scoped lang="scss">

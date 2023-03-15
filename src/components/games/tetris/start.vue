@@ -24,10 +24,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, reactive } from "vue";
+import { computed, ref, reactive, defineProps } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus"
+const props = defineProps(["rightAside"])
 
 const store = useStore();
 const router = useRouter();
@@ -47,24 +48,25 @@ const state = reactive({
     column:computed(()=>store.state.tetris.container.column),
 })
 const play = function(){
-    const dom = descriptions.value.$parent.$el;
-    const height = dom.offsetHeight;
-    const width = dom.offsetWidth - 200;
-    if(height >= state.row * state.subWidth && width >= state.column * state.subHeight){
-        router.push({
-            path:"/games/tetris/playing"
-        })
-    }else{
-        ElMessage({
-            message:"当前视口大小不够您玩游戏的呀",
-            type:"error"
-        })
-    }
+  const dom = descriptions.value.$parent.$el;
+  const height = dom.offsetHeight;
+  const width = dom.offsetWidth - props.rightAside;
+  if(height >= state.row * state.subWidth && width >= state.column * state.subHeight){
+      router.push({
+          path:"/games/tetris/playing"
+      })
+  }else{
+      ElMessage({
+          message:"当前视口大小不够您玩游戏的呀",
+          type:"error"
+      })
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .descriptions{
     height: 100%;
+    padding: 20px;
 }
 </style>

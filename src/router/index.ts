@@ -1,4 +1,5 @@
-import * as router from "vue-router";
+import {createRouter, createWebHistory,  } from "vue-router";
+import beforeEach from "./beforeEach";
 const routes = [
     {
         path: '/',
@@ -60,7 +61,9 @@ const routes = [
         ]
     },
 ]
-export default router.createRouter({
-    history: router.createWebHistory(),
+const router = createRouter({
+    history: createWebHistory(),
     routes,
 })
+router.beforeEach(beforeEach);
+export default router;
