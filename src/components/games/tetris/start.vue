@@ -49,7 +49,7 @@ const state = reactive({
 const play = function(){
     const dom = descriptions.value.$parent.$el;
     const height = dom.offsetHeight;
-    const width = dom.offsetWidth;
+    const width = dom.offsetWidth - 200;
     if(height >= state.row * state.subWidth && width >= state.column * state.subHeight){
         router.push({
             path:"/games/tetris/playing"
