@@ -1,14 +1,12 @@
 import random from "@/utils/random";
 import { ElMessageBox } from "element-plus";
 const has = (data:any,list:any)=>{
-  return data.every((item1:any)=>item1.every((item2:any)=>list.every((item3:any)=>{
-    if(item3[0] === item2.coor[0] && item3[1] === item2.coor[1]){
-      if(item3.type === 2){
-        return false;
-      }
+  return list.every((item:any)=>{
+    if(data[item[1]]){
+      return data[item[1]][item[0]].type !== 2;
     }
     return true;
-  })))
+  })
 }
 const actions = {
   create({ state, commit, dispatch }:any){//创建游戏
@@ -50,9 +48,16 @@ const actions = {
       dispatch("loop");//循环开始游戏
     }
   },
-  end({ state }:any){//游戏结束
+  end({ state,dispatch,getters }:any){//游戏结束
     state.stop = false;
     window.onkeydown = null;//清除键盘事件
+    clearTimeout(state.timing);//清除计时器
+    ElMessageBox.alert(`用时${getters.times}，共消除${state.crushNums}行，得分为${getters.number}。了不起！继续努力把！`,"很遗憾，游戏失败", {
+      confirmButtonText: '重新开始',
+      callback: () => {
+        dispatch("create");
+      },
+    })
   },
   createBox({ state, commit }:any){//创建方块
     const type = random(7);//随机生成系列类型
