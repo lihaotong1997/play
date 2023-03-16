@@ -13,13 +13,11 @@ const style = computed(()=>{
     let obj =  {
         width:`${store.state.tetris.container.subWidth}px`,
         height:`${store.state.tetris.container.subHeight}px`,
+        backgroundColor: store.state.tetris.emptyColor,
     }
-    if(props.options.type === 0){
-        obj.backgroundColor = store.state.tetris.emptyColor;
-    }else if(props.options.type === 2){
+    if(props.options.type === 2){
         obj.backgroundColor = store.state.tetris.noEmptyColor;
-    }
-    if(store.state.tetris.container.data && store.state.tetris.currentBox){
+    }else if(store.state.tetris.container.data && store.state.tetris.currentBox){
         const box = store.state.tetris.currentBox;
         const list = box.list[box.state].forEach((item1:any) => {
             const x = item1[0] + box.x;

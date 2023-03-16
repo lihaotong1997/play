@@ -32,7 +32,7 @@ const props = defineProps(["rightAside"])
 
 const store = useStore();
 const router = useRouter();
-const descriptions = ref(null);
+const descriptions:any = ref(null);
 const state = reactive({
     difficultyActive:computed({
         get(){

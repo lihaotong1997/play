@@ -36,7 +36,7 @@ const store = useStore();
 const state = reactive({
     crushNums:computed(()=>store.state.tetris.crushNums),
     time:computed(()=>store.getters["tetris/times"]),
-    difficulty:computed(()=>store.state.tetris.difficulty.options.find(item=>item.label === store.state.tetris.difficulty.active).name),
+    difficulty:computed(()=>store.state.tetris.difficulty.options.find((item:any)=>item.label === store.state.tetris.difficulty.active).name),
     afterBox:computed(()=>store.state.tetris.afterBox),
     number:computed(()=>store.getters["tetris/number"]),
     stop:computed({
@@ -46,8 +46,8 @@ const state = reactive({
       }
     }),
 })
-const getStyle = (x,y)=>{
-  let obj = {
+const getStyle = (x:number,y:number)=>{
+  let obj:any = {
     width:`${store.state.tetris.container.subWidth}px`,
     height:`${store.state.tetris.container.subHeight}px`,
   }
