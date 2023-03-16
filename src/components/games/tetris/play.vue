@@ -3,11 +3,14 @@
       <el-main>
         <container></container>
       </el-main>
-      <el-aside :width="`${props.rightAside}px`">Aside</el-aside>
+      <el-aside :width="`${props.rightAside}px`">
+        <asides></asides>
+      </el-aside>
     </el-container>
 </template>
 
 <script setup lang="ts">
+import asides from "./aside.vue";
 import { defineProps } from "vue";
 import { useStore } from "vuex";
 import container from "./container.vue";

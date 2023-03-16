@@ -28,7 +28,26 @@ const mutations = {
       state.currentBox = state.afterBox;
       state.afterBox = null;
     },
-    box1(state:any,obj:any){//正方形
+    setNonEmpty(state:any){//转化为固定块
+      let list = state.currentBox.list[state.currentBox.state];
+      list = list.map((item:Array<number>)=>[item[0] + state.currentBox.x,item[1] + state.currentBox.y]);
+      list.forEach((item:any) => {
+        state.container.data[item[1]][item[0]].type = 2;
+      });
+      state.currentBox = null;
+    },
+    destroy(state:any){//销毁行
+      state.container.data.forEach((item1:any,index1:number) => {
+        if(item1.every((item2:any)=>item2.type === 2)){
+          state.container.data.unshift(state.container.data.splice(index1,1)[0].map((item:any,index:number)=>{
+            item.type = 0;
+            item.coor = [index, 0];
+            return item;
+          }));
+        }
+      });
+    },
+    box0(state:any,obj:any){//正方形
       obj.list = [
           [
               [0,0], [0,1], [1,0], [1,1]
@@ -37,7 +56,7 @@ const mutations = {
       obj.state = random(obj.list.length);
       state.afterBox = obj;
     },
-    box2(state:any,obj:any){//正方形
+    box1(state:any,obj:any){//正方形
       obj.list = [
           [[0,1], [0,2], [1,2], [2,2]],
           [[1,0], [2,0], [1,1], [1,2]],
@@ -47,7 +66,7 @@ const mutations = {
       obj.state = random(obj.list.length);
       state.afterBox = obj;
     },
-    box3(state:any,obj:any){//正方形
+    box2(state:any,obj:any){//正方形
       obj.list = [
         [[2,1], [0,2], [1,2], [2,2]],
         [[0,0], [1,0], [1,1], [1,2]],
@@ -57,7 +76,7 @@ const mutations = {
       obj.state = random(obj.list.length);
       state.afterBox = obj;
     },
-    box4(state:any,obj:any){//正方形
+    box3(state:any,obj:any){//正方形
       obj.list = [
         [[1,1], [0,2], [1,2], [2,2]],
         [[1,0], [1,1], [1,2], [2,1]],
@@ -67,7 +86,7 @@ const mutations = {
       obj.state = random(obj.list.length);
       state.afterBox = obj;
     },
-    box5(state:any,obj:any){//正方形
+    box4(state:any,obj:any){//正方形
       obj.list = [
         [[0,1], [1,1], [1,2], [2,2]],
         [[2,0], [1,1], [2,1], [1,2]],
@@ -75,7 +94,7 @@ const mutations = {
       obj.state = random(obj.list.length);
       state.afterBox = obj;
     },
-    box6(state:any,obj:any){//正方形
+    box5(state:any,obj:any){//正方形
       obj.list = [
         [[0,3], [1,3], [2,3], [3,3]],
         [[1,0], [1,1], [1,2], [1,3]],
@@ -83,7 +102,7 @@ const mutations = {
       obj.state = random(obj.list.length);
       state.afterBox = obj;
     },
-    box7(state:any,obj:any){//正方形
+    box6(state:any,obj:any){//正方形
       obj.list = [
         [[1,1], [2,1], [0,2], [1,2]],
         [[1,0], [1,1], [2,1], [2,2]],
@@ -94,7 +113,9 @@ const mutations = {
     timing(state:any){
       clearTimeout(state.timing);
       state.timing = setInterval(()=>{
-        state.time++;
+        if(!state.stop){
+          state.time++;
+        }
       },1000)
     }
 }

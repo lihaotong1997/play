@@ -11,15 +11,18 @@ const state = {
         options:[//可选难度
             {
                 name:"初级",
-                label:"elementary"
+                label:"elementary",
+                timeout:2000,
             },
             {
                 name:"中级级",
-                label:"intermediate"
+                label:"intermediate",
+                timeout:1000,
             },
             {
                 name:"高级",
-                label:"advanced"
+                label:"advanced",
+                timeout:500,
             }
         ]
     },
