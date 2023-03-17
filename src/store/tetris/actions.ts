@@ -1,11 +1,18 @@
 import random from "@/utils/random";
 import { ElMessageBox } from "element-plus";
-const has = (data:any,list:any)=>{
+const has = (state:any,list:any)=>{
   return list.every((item:any)=>{
-    if(data[item[1]]){
-      return data[item[1]][item[0]].type !== 2;
+    if(item[0] >= 0 && item[0] < state.container.column){//左右未超出
+      if(item[1] < 0){//还未下来
+        return true;
+      }else if(item[1] >= state.container.row){//下面超出了
+        return false;
+      }else{//在画布中
+        return state.container.data[item[1]][item[0]].type !== 2;
+      }
+    }else{//左右超出了
+      return false;
     }
-    return true;
   })
 }
 const actions = {
@@ -22,7 +29,7 @@ const actions = {
     dispatch("arrowDown").then(()=>{
       const timeout = state.difficulty.options.find((item:any)=>item.label === state.difficulty.active).timeout;
       if(!state.stop){
-        setTimeout(() => {
+        state.loopTimer = setTimeout(() => {
           dispatch("loop");
         }, timeout);
       }
@@ -103,7 +110,8 @@ const actions = {
     if(state.currentBox){//有移动系列
         let list = state.currentBox.list[state.currentBox.state];
         list = list.map((item:Array<number>)=>[item[0] + state.currentBox.x,item[1] + state.currentBox.y + 1]);
-        const isGo = list.every((item:any)=>item[1] < state.container.row) && has(state.container.data,list);
+        // const isGo = list.every((item:any)=>item[1] < state.container.row) && has(state.container.data,list);
+        const isGo = has(state,list);
         if(isGo){
           state.currentBox.y++;
           return Promise.resolve();
@@ -116,7 +124,8 @@ const actions = {
     if(state.currentBox){//有移动系列
         let list = state.currentBox.list[state.currentBox.state];
         list = list.map((item:Array<number>)=>[item[0] + state.currentBox.x - 1,item[1] + state.currentBox.y]);
-        const isGo = list.every((item:any)=>item[0] >= 0) && has(state.container.data,list);
+        // const isGo = list.every((item:any)=>item[0] >= 0) && has(state.container.data,list);
+        const isGo = has(state,list);
         if(isGo){
           state.currentBox.x--;
         }
@@ -126,7 +135,8 @@ const actions = {
     if(state.currentBox){//有移动系列
         let list = state.currentBox.list[state.currentBox.state];
         list = list.map((item:Array<number>)=>[item[0] + state.currentBox.x + 1,item[1] + state.currentBox.y]);
-        const isGo = list.every((item:any)=>item[0] < state.container.column) && has(state.container.data,list);
+        // const isGo = list.every((item:any)=>item[0] < state.container.column) && has(state.container.data,list);
+        const isGo = has(state,list);
         if(isGo){
           state.currentBox.x++;
         }
@@ -137,7 +147,8 @@ const actions = {
         const index = state.currentBox.state > 0 ? state.currentBox.state - 1 : state.currentBox.list.length - 1;
         let list = state.currentBox.list[index];
         list = list.map((item:Array<number>)=>[item[0] + state.currentBox.x,item[1] + state.currentBox.y]);
-        const isGo = has(state.container.data,list);
+        // const isGo = has(state.container.data,list);
+        const isGo = has(state,list);
         if(isGo){
           state.currentBox.state = index;
         }

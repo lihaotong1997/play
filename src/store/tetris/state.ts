@@ -31,7 +31,8 @@ const state = {
     timing:null,//计时器
     currentBox:null,//当前快
     afterBox:null,//下一块
-    stop:false,
+    stop:false,//是否暂停
+    loopTimer:null,//循环降落的延时器
     keydownCodeMap:{//需要添加的键盘事件
         Space:"space",
         Enter:"enter",

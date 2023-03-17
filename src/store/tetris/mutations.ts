@@ -22,6 +22,7 @@ const mutations = {
       state.currentBox = null;
       state.afterBox = null;
       state.stop = false;
+      clearTimeout(state.loopTimer);
     },
     setCurrentBox(state:any){
       state.currentBox = state.afterBox;
