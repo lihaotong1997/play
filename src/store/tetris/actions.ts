@@ -110,7 +110,6 @@ const actions = {
     if(state.currentBox){//有移动系列
         let list = state.currentBox.list[state.currentBox.state];
         list = list.map((item:Array<number>)=>[item[0] + state.currentBox.x,item[1] + state.currentBox.y + 1]);
-        // const isGo = list.every((item:any)=>item[1] < state.container.row) && has(state.container.data,list);
         const isGo = has(state,list);
         if(isGo){
           state.currentBox.y++;
@@ -124,7 +123,6 @@ const actions = {
     if(state.currentBox){//有移动系列
         let list = state.currentBox.list[state.currentBox.state];
         list = list.map((item:Array<number>)=>[item[0] + state.currentBox.x - 1,item[1] + state.currentBox.y]);
-        // const isGo = list.every((item:any)=>item[0] >= 0) && has(state.container.data,list);
         const isGo = has(state,list);
         if(isGo){
           state.currentBox.x--;
@@ -135,7 +133,6 @@ const actions = {
     if(state.currentBox){//有移动系列
         let list = state.currentBox.list[state.currentBox.state];
         list = list.map((item:Array<number>)=>[item[0] + state.currentBox.x + 1,item[1] + state.currentBox.y]);
-        // const isGo = list.every((item:any)=>item[0] < state.container.column) && has(state.container.data,list);
         const isGo = has(state,list);
         if(isGo){
           state.currentBox.x++;
@@ -147,7 +144,6 @@ const actions = {
         const index = state.currentBox.state > 0 ? state.currentBox.state - 1 : state.currentBox.list.length - 1;
         let list = state.currentBox.list[index];
         list = list.map((item:Array<number>)=>[item[0] + state.currentBox.x,item[1] + state.currentBox.y]);
-        // const isGo = has(state.container.data,list);
         const isGo = has(state,list);
         if(isGo){
           state.currentBox.state = index;
