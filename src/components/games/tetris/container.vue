@@ -2,7 +2,7 @@
   <div :style="style">
     <div v-for="(item1,index1) in state.data" :key="index1">
       <div v-for="(item2,index2) in item1" :key="index2">
-        <box :options="item2"></box>
+        <box :options="item2" :x="index2" :y="index1"></box>
       </div>
     </div>
   </div>

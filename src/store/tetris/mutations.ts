@@ -9,7 +9,6 @@ const mutations = {
         let arr = [];
         for(let j = 0; j < state.container.column; j++){
           arr.push({
-            coor:[ j, i ],//坐标
             type:0,//0空 1移动 2有
           })
         }
@@ -39,9 +38,9 @@ const mutations = {
     destroy(state:any){//销毁行
       state.container.data.forEach((item1:any,index1:number) => {
         if(item1.every((item2:any)=>item2.type === 2)){
+          state.crushNums++;//销毁行数
           state.container.data.unshift(state.container.data.splice(index1,1)[0].map((item:any,index:number)=>{
             item.type = 0;
-            item.coor = [index, 0];
             return item;
           }));
         }

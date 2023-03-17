@@ -11,25 +11,27 @@ const state = {
         options:[//可选难度
             {
                 name:"初级",
-                label:"elementary",
                 timeout:2000,
+                label:"elementary"
             },
             {
                 name:"中级级",
-                label:"intermediate",
                 timeout:1000,
+                label:"intermediate"
             },
             {
                 name:"高级",
-                label:"advanced",
                 timeout:500,
+                label:"advanced"
             }
         ]
     },
     crushNums:0,//消除行数
     time:0,//用时
+    timing:null,//计时器
     currentBox:null,//当前快
     afterBox:null,//下一块
+    stop:false,
     keydownCodeMap:{//需要添加的键盘事件
         Space:"space",
         Enter:"enter",

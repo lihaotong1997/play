@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "vuex";
-const props = defineProps(["options"])
+const props = defineProps(["options","x","y"])
 const store = useStore();
 const style = computed(()=>{
     let obj =  {
@@ -22,7 +22,7 @@ const style = computed(()=>{
         const list = box.list[box.state].forEach((item1:any) => {
             const x = item1[0] + box.x;
             const y = item1[1] + box.y;
-            if(props.options.coor[0] === x && props.options.coor[1] === y){
+            if(props.x === x && props.y === y){
                 obj.backgroundColor = box.color;
             }
         });
